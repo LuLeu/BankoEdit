@@ -1,6 +1,6 @@
 package de.luleu.bankoedit.math;
 
-public final class BlockVector3D {
+public final class BlockVector {
 
     private final int x, y, z;
 
@@ -11,18 +11,18 @@ public final class BlockVector3D {
      * @param y the Y coordinate
      * @param z the Z coordinate
      */
-    public BlockVector3D(int x, int y, int z) {
+    public BlockVector(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public static BlockVector3D at(double x, double y, double z) {
+    public static BlockVector at(double x, double y, double z) {
         return at((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z));
     }
 
-    public static BlockVector3D at(int x, int y, int z) {
-        return new BlockVector3D(x, y, z);
+    public static BlockVector at(int x, int y, int z) {
+        return new BlockVector(x, y, z);
     }
 
     /**
@@ -32,7 +32,7 @@ public final class BlockVector3D {
      * @param max the maximum point (X, Y, and Z are the lowest)
      * @return true if the vector is contained
      */
-    public boolean containedWithin(BlockVector3D min, BlockVector3D max) {
+    public boolean containedWithin(BlockVector min, BlockVector max) {
         return x >= min.x && x <= max.x && y >= min.y && y <= max.y && z >= min.z && z <= max.z;
     }
 
