@@ -6,7 +6,6 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
 
     }
 
@@ -15,3 +14,4 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 }
+
