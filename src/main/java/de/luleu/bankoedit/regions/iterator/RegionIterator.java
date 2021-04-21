@@ -1,18 +1,18 @@
 package de.luleu.bankoedit.regions.iterator;
 
-import de.luleu.bankoedit.math.BlockVector3D;
+import de.luleu.bankoedit.math.BlockVector;
 import de.luleu.bankoedit.regions.Region;
 
 import java.util.Iterator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class RegionIterator implements Iterator<BlockVector3D> {
+public class RegionIterator implements Iterator<BlockVector> {
 
     private final Region region;
 
-    private final BlockVector3D max;
-    private final BlockVector3D min;
+    private final BlockVector max;
+    private final BlockVector min;
 
     private final int maxX;
     private final int maxY;
@@ -26,8 +26,8 @@ public class RegionIterator implements Iterator<BlockVector3D> {
 
         this.region = region;
 
-        this.max = region.getMaximumPoint();
-        this.min = region.getMinimumPoint();
+        this.max = region.getSecondVector();
+        this.min = region.getFirstVector();
 
         this.maxX = this.max.getX();
         this.maxY = this.max.getY();
@@ -45,7 +45,7 @@ public class RegionIterator implements Iterator<BlockVector3D> {
     }
 
     private void forward() {
-        while (hasNext() && !region.contains(BlockVector3D.at(nextX, nextY, nextZ))) {
+        while (hasNext() && !region.contains(BlockVector.at(nextX, nextY, nextZ))) {
             forwardOne();
         }
     }
@@ -71,7 +71,7 @@ public class RegionIterator implements Iterator<BlockVector3D> {
     }
 
     @Override
-    public BlockVector3D next() {
+    public BlockVector next() {
         return null;
     }
 
@@ -84,11 +84,11 @@ public class RegionIterator implements Iterator<BlockVector3D> {
         return region;
     }
 
-    public BlockVector3D getMax() {
+    public BlockVector getMax() {
         return max;
     }
 
-    public BlockVector3D getMin() {
+    public BlockVector getMin() {
         return min;
     }
 
