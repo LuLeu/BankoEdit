@@ -4,12 +4,13 @@ import de.luleu.bankoedit.math.BlockVector;
 import de.luleu.bankoedit.regions.Region;
 import de.luleu.bankoedit.regions.iterator.RegionIterator;
 import org.bukkit.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
 public class RegionImpl implements Region {
 
-    protected final World world;
+    protected World world;
     /**
      * <p>first coordinates</p>
      * <p>
@@ -69,8 +70,14 @@ public class RegionImpl implements Region {
         return new RegionIterator(this);
     }
 
+    @Override
     public World getWorld() {
         return world;
+    }
+
+    @Override
+    public void setWorld(@Nullable World world) {
+        this.world = world;
     }
 
     @Override
