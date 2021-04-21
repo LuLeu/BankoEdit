@@ -4,3 +4,6 @@ main: de.luleu.bankoedit.Main
 api-version: 1.16
 authors: [ DerLuLeu ]
 description: A world editing tool for Banko Building
+
+commands:
+  mark:
