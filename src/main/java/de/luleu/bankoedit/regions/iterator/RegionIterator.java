@@ -36,6 +36,8 @@ public class RegionIterator implements Iterator<BlockVector> {
         this.nextX = this.min.getX();
         this.nextY = this.min.getY();
         this.nextZ = this.min.getZ();
+
+        forward();
     }
 
 
@@ -72,47 +74,20 @@ public class RegionIterator implements Iterator<BlockVector> {
 
     @Override
     public BlockVector next() {
-        return null;
+        if (!hasNext()) {
+            throw new java.util.NoSuchElementException();
+        }
+
+        BlockVector answer = BlockVector.at(nextX, nextY, nextZ);
+
+        forwardOne();
+        forward();
+
+        return answer;
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
-    }
-
-    public Region getRegion() {
-        return region;
-    }
-
-    public BlockVector getMax() {
-        return max;
-    }
-
-    public BlockVector getMin() {
-        return min;
-    }
-
-    public int getMaxX() {
-        return maxX;
-    }
-
-    public int getMaxY() {
-        return maxY;
-    }
-
-    public int getMaxZ() {
-        return maxZ;
-    }
-
-    public int getNextX() {
-        return nextX;
-    }
-
-    public int getNextY() {
-        return nextY;
-    }
-
-    public int getNextZ() {
-        return nextZ;
     }
 }
