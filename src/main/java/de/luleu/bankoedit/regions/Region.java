@@ -1,22 +1,22 @@
 package de.luleu.bankoedit.regions;
 
-import de.luleu.bankoedit.math.BlockVector3D;
+import de.luleu.bankoedit.math.BlockVector;
 
-public interface Region extends Iterable<BlockVector3D>, Cloneable {
+public interface Region extends Iterable<BlockVector>, Cloneable {
 
     /**
      * Get the lower point of a region.
      *
      * @return min. point
      */
-    BlockVector3D getMinimumPoint();
+    BlockVector getFirstVector();
 
     /**
      * Get the upper point of a region.
      *
      * @return max. point
      */
-    BlockVector3D getMaximumPoint();
+    BlockVector getSecondVector();
 
     /**
      * Returns true based on whether the region contains the point.
@@ -24,6 +24,6 @@ public interface Region extends Iterable<BlockVector3D>, Cloneable {
      * @param position the position
      * @return true if contained
      */
-    boolean contains(BlockVector3D position);
+    boolean contains(BlockVector position);
 
 }
