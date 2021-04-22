@@ -52,5 +52,4 @@ public interface Region extends Iterable<BlockVector>, Cloneable {
      * @return true if contained
      */
     boolean contains(BlockVector position);
-
 }
