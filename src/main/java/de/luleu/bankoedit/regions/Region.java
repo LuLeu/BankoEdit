@@ -7,18 +7,29 @@ import org.jetbrains.annotations.Nullable;
 public interface Region extends Iterable<BlockVector>, Cloneable {
 
     /**
-     * Get the lower point of a region.
+     * Get the first point of a region.
      *
-     * @return min. point
+     * @throws NullPointerException throws null when first or second vector is null
+     * @return first point
      */
-    BlockVector getFirstVector();
+    BlockVector getFirstVector() throws NullPointerException;
 
     /**
-     * Get the upper point of a region.
+     * Get the second point of a region.
      *
-     * @return max. point
+     * @return second point
      */
     BlockVector getSecondVector();
+
+    /**
+     * Set the first point of a region.
+     */
+    void setFirstVector(BlockVector blockVector);
+
+    /**
+     * Set the second point of a region.
+     */
+    void setSecondVector(BlockVector blockVector);
 
     /**
      * Sets the world that the selection is in.
