@@ -9,10 +9,15 @@ public interface Region extends Iterable<BlockVector>, Cloneable {
     /**
      * Get the first point of a region.
      *
-     * @throws NullPointerException throws null when first or second vector is null
      * @return first point
+     * @throws NullPointerException throws null when first or second vector is null
      */
     BlockVector getFirstVector() throws NullPointerException;
+
+    /**
+     * Set the first point of a region.
+     */
+    void setFirstVector(BlockVector blockVector);
 
     /**
      * Get the second point of a region.
@@ -22,14 +27,23 @@ public interface Region extends Iterable<BlockVector>, Cloneable {
     BlockVector getSecondVector();
 
     /**
-     * Set the first point of a region.
-     */
-    void setFirstVector(BlockVector blockVector);
-
-    /**
      * Set the second point of a region.
      */
     void setSecondVector(BlockVector blockVector);
+
+    /**
+     * Get the lower point of a region.
+     *
+     * @return min. point
+     */
+    BlockVector getMinimumPoint();
+
+    /**
+     * Get the upper point of a region.
+     *
+     * @return max. point
+     */
+    BlockVector getMaximumPoint();
 
     /**
      * Sets the world that the selection is in.
@@ -52,4 +66,16 @@ public interface Region extends Iterable<BlockVector>, Cloneable {
      * @return true if contained
      */
     boolean contains(BlockVector position);
+
+    /**
+     * Make a clone of the region.
+     *
+     * @return a cloned version
+     */
+    Region clone();
+
+    /**
+     * @return true if both vectors aren't null
+     */
+    boolean isSelected();
 }
