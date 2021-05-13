@@ -62,4 +62,115 @@ public final class BlockVector {
     public int getZ() {
         return z;
     }
+
+    /**
+     * Subtract another vector from this vector and return the result
+     * as a new vector.
+     *
+     * @param other the other vector
+     * @return a new vector
+     */
+    public BlockVector subtract(BlockVector other) {
+        return subtract(other.x, other.y, other.z);
+    }
+
+    /**
+     * Subtract another vector from this vector and return the result
+     * as a new vector.
+     *
+     * @param x the value to subtract
+     * @param y the value to subtract
+     * @param z the value to subtract
+     * @return a new vector
+     */
+    public BlockVector subtract(int x, int y, int z) {
+        return BlockVector.at(this.x - x, this.y - y, this.z - z);
+    }
+
+    /**
+     * Add another vector to this vector and return the result as a new vector.
+     *
+     * @param other the other vector
+     * @return a new vector
+     */
+    public BlockVector add(BlockVector other) {
+        return add(other.x, other.y, other.z);
+    }
+
+    /**
+     * Add another vector to this vector and return the result as a new vector.
+     *
+     * @param x the value to add
+     * @param y the value to add
+     * @param z the value to add
+     * @return a new vector
+     */
+    public BlockVector add(int x, int y, int z) {
+        return BlockVector.at(this.x + x, this.y + y, this.z + z);
+    }
+
+    /**
+     * Get the X coordinate.
+     *
+     * @return the x coordinate
+     */
+    public int getBlockX() {
+        return x;
+    }
+
+    /**
+     * Get the Y coordinate.
+     *
+     * @return the y coordinate
+     */
+    public int getBlockY() {
+        return y;
+    }
+
+    /**
+     * Get the Z coordinate.
+     *
+     * @return the z coordinate
+     */
+    public int getBlockZ() {
+        return z;
+    }
+
+    /**
+     * Gets the maximum components of two vectors.
+     *
+     * @param blockVector the second vector
+     * @return maximum
+     */
+    public BlockVector getMaximum(BlockVector blockVector) {
+        return new BlockVector(
+                Math.max(x, blockVector.x),
+                Math.max(y, blockVector.y),
+                Math.max(z, blockVector.z)
+        );
+    }
+
+    /**
+     * Gets the minimum components of two vectors.
+     *
+     * @param blockVector the second vector
+     * @return minimum
+     */
+    public BlockVector getMinimum(BlockVector blockVector) {
+        return new BlockVector(
+                Math.min(x, blockVector.x),
+                Math.min(y, blockVector.y),
+                Math.min(z, blockVector.z)
+        );
+    }
+
+
+    @Override
+    public String toString() {
+        return "BlockVector{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }
