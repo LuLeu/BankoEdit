@@ -6,4 +6,5 @@ authors: [ DerLuLeu ]
 description: A world editing tool for Banko Building
 
 commands:
-  mark:
+  set:
+  session:
