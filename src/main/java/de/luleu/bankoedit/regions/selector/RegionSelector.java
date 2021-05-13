@@ -44,4 +44,6 @@ public interface RegionSelector {
      * @return the created region
      */
     Region getRegion();
+
+    String toString();
 }

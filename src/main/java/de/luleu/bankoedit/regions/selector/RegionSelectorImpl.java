@@ -1,10 +1,9 @@
-package de.luleu.bankoedit.regions.selector.impl;
+package de.luleu.bankoedit.regions.selector;
 
 
 import de.luleu.bankoedit.math.BlockVector;
 import de.luleu.bankoedit.regions.Region;
-import de.luleu.bankoedit.regions.impl.RegionImpl;
-import de.luleu.bankoedit.regions.selector.RegionSelector;
+import de.luleu.bankoedit.regions.RegionImpl;
 import org.bukkit.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,42 +16,18 @@ public class RegionSelectorImpl implements RegionSelector {
     protected BlockVector position2;
     protected Region region;
 
-//    /**
-//     * Create a new region selector with the given two positions.
-//     *
-//     * @param world the world
-//     * @param position1 position 1
-//     * @param position2 position 2
-//     */
-//    public RegionSelectorImpl(@Nullable World world, BlockVector position1, BlockVector position2) {
-//        this.region = new RegionImpl(world);
-//        this.world = world;
-//
-//        checkNotNull(position1);
-//        checkNotNull(position2);
-//        this.position1 = position1;
-//        this.position2 = position2;
-//
-//        region.setFirstVector(this.position1);
-//        region.setSecondVector(this.position2);
-//    }
-
     /**
      * Create a new region selector in given world
      *
      * @param world the world
      */
-    public RegionSelectorImpl(@Nullable World world) {
+    private RegionSelectorImpl(@Nullable World world) {
         this.world = world;
-
-        this.init();
+        this.region = RegionImpl.create(world);
     }
 
-    private void init() {
-        checkNotNull(this.world);
-
-        new RegionImpl(world);
-        this.region = new RegionImpl(this.world);
+    public static RegionSelector create(@Nullable World world) {
+        return new RegionSelectorImpl(world);
     }
 
     @Override
@@ -94,5 +69,15 @@ public class RegionSelectorImpl implements RegionSelector {
     @Override
     public Region getRegion() {
         return this.region;
+    }
+
+    @Override
+    public String toString() {
+        return "RegionSelectorImpl{" +
+                "world=" + world +
+                ", position1=" + position1 +
+                ", position2=" + position2 +
+                ", region=" + region +
+                '}';
     }
 }
