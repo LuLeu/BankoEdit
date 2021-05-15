@@ -1,9 +1,8 @@
 package de.luleu.bankoedit.regions;
 
 import de.luleu.bankoedit.math.BlockVector;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.jetbrains.annotations.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -36,14 +35,6 @@ public class RegionImpl implements Region {
         this.world = world;
         this.firstVector = firstVector;
         this.secondVector = secondVector;
-    }
-
-    public static Region create(World world) {
-        return new RegionImpl(world);
-    }
-
-    public static Region create(World world, int x1, int y1, int z1, int x2, int y2, int z2) {
-        return new RegionImpl(world, BlockVector.at(x1, y1, z1), BlockVector.at(x2, y2, z2));
     }
 
     @Override
@@ -141,8 +132,6 @@ public class RegionImpl implements Region {
 
     @Override
     public boolean isSelected() {
-        Bukkit.broadcastMessage(firstVector.toString() + " | " + secondVector.toString());
-
         return this.firstVector != null || this.secondVector != null;
     }
 }

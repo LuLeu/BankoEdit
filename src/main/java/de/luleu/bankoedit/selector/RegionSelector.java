@@ -1,18 +1,16 @@
-package de.luleu.bankoedit.regions.selector;
+package de.luleu.bankoedit.selector;
 
 import de.luleu.bankoedit.math.BlockVector;
 import de.luleu.bankoedit.regions.Region;
 import org.bukkit.World;
-import org.jetbrains.annotations.Nullable;
 
 public interface RegionSelector {
 
     /**
      * Get the world for the region selector.
      *
-     * @return a world, which may be null
+     * @return a world
      */
-    @Nullable
     World getWorld();
 
     /**

@@ -8,3 +8,5 @@ description: A world editing tool for Banko Building
 commands:
   set:
   session:
+  replace:
+  undo:

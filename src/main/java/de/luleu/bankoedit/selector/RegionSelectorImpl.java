@@ -1,11 +1,11 @@
-package de.luleu.bankoedit.regions.selector;
+package de.luleu.bankoedit.selector;
 
 
 import de.luleu.bankoedit.math.BlockVector;
 import de.luleu.bankoedit.regions.Region;
 import de.luleu.bankoedit.regions.RegionImpl;
 import org.bukkit.World;
-import org.jetbrains.annotations.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -21,18 +21,14 @@ public class RegionSelectorImpl implements RegionSelector {
      *
      * @param world the world
      */
-    private RegionSelectorImpl(@Nullable World world) {
+    public RegionSelectorImpl(@Nullable World world) {
         this.world = world;
-        this.region = RegionImpl.create(world);
-    }
-
-    public static RegionSelector create(@Nullable World world) {
-        return new RegionSelectorImpl(world);
+        this.region = new RegionImpl(world);
     }
 
     @Override
-    public @Nullable World getWorld() {
-        return null;
+    public World getWorld() {
+        return this.world;
     }
 
     @Override

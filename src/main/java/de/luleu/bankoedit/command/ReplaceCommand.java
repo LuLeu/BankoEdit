@@ -1,12 +1,11 @@
 package de.luleu.bankoedit.command;
 
 import de.luleu.bankoedit.Main;
-import de.luleu.bankoedit.operation.SetOperation;
+import de.luleu.bankoedit.operation.ReplaceOperation;
 import de.luleu.bankoedit.selector.RegionSelector;
 import de.luleu.bankoedit.sessions.SessionManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,8 +17,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-public class SetCommand implements CommandExecutor, TabExecutor {
+public class ReplaceCommand implements CommandExecutor, TabExecutor {
+
+    public ReplaceCommand() {
+        Objects.requireNonNull(Main.getPlugin(Main.class).getCommand("replace")).setExecutor(this);
+        Objects.requireNonNull(Main.getPlugin(Main.class).getCommand("replace")).setTabCompleter(this);
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -29,9 +34,16 @@ public class SetCommand implements CommandExecutor, TabExecutor {
         }
 
         final Player player = (Player) sender;
-        final Material material = Material.getMaterial(args[0].toUpperCase(Locale.ROOT));
+        final Material toReplace = Material.getMaterial(args[0].toUpperCase(Locale.ROOT));
+        final Material replace = Material.getMaterial(args[1].toUpperCase(Locale.ROOT));
 
-        if (material == null) {
+
+        if (toReplace == null) {
+            player.sendMessage(Component.text("§cDu must ein valides Material angeben!"));
+            return false;
+        }
+
+        if (replace == null) {
             player.sendMessage(Component.text("§cDu must ein valides Material angeben!"));
             return false;
         }
@@ -43,12 +55,16 @@ public class SetCommand implements CommandExecutor, TabExecutor {
 
         SessionManager.SessionHolder holder = Main.sessionManager.getIfPresent(player);
 
-        if (!holder.getSession().getRegionSelector().getRegion().isSelected()) {
+        RegionSelector selector = holder.getSession().getRegionSelector();
+
+        if (!selector.getRegion().isSelected()) {
             player.sendMessage(Component.text("§cDu musst erst 2 Positionen markieren!"));
             return false;
         }
 
-        holder.getSession().executeOperation(new SetOperation(holder, material));
+        holder.getSession().setExecutionSize(holder.getSession().getExecutionSize() + 1);
+
+        holder.getSession().executeOperation(new ReplaceOperation(holder, replace, toReplace));
 
         return true;
     }
@@ -61,11 +77,18 @@ public class SetCommand implements CommandExecutor, TabExecutor {
         if (args.length == 1) {
             for (Material material : Material.values()) {
 
-                if (material.toString().startsWith(args[0].toUpperCase()) && material.isBlock() )
-                    strings.add(material.toString());
+                if (material.toString().startsWith(args[0].toUpperCase()) && material.isBlock())
+                    strings.add(material.toString().toLowerCase());
+            }
+        } else if (args.length == 2) {
+            for (Material material : Material.values()) {
+
+                if (material.toString().startsWith(args[1].toUpperCase()) && material.isBlock())
+                    strings.add(material.toString().toLowerCase());
             }
         }
 
         return strings;
     }
+
 }

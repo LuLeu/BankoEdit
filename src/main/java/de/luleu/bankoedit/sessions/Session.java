@@ -1,11 +1,15 @@
 package de.luleu.bankoedit.sessions;
 
-import de.luleu.bankoedit.regions.selector.RegionSelector;
+import de.luleu.bankoedit.clipboard.ClipBoard;
+import de.luleu.bankoedit.operation.Operation;
+import de.luleu.bankoedit.selector.RegionSelector;
 import org.bukkit.entity.Player;
 
 public interface Session {
 
     Player getPlayer();
+
+    ClipBoard getClipBoard();
 
     boolean isActive();
 
@@ -19,6 +23,10 @@ public interface Session {
         return 0;
     }
 
+    void executeOperation(Operation operation);
+
     void setExecutionSize(int size);
+
+
 
 }

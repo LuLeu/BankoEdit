@@ -1,9 +1,12 @@
 package de.luleu.bankoedit.sessions;
 
 import de.luleu.bankoedit.Main;
+import de.luleu.bankoedit.clipboard.ClipBoard;
+import de.luleu.bankoedit.clipboard.ClipBoardImpl;
 import de.luleu.bankoedit.math.BlockVector;
-import de.luleu.bankoedit.regions.selector.RegionSelector;
-import de.luleu.bankoedit.regions.selector.RegionSelectorImpl;
+import de.luleu.bankoedit.operation.Operation;
+import de.luleu.bankoedit.selector.RegionSelector;
+import de.luleu.bankoedit.selector.RegionSelectorImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,6 +20,8 @@ public class SessionImpl implements Session, Listener {
     private final Player player;
     private final RegionSelector regionSelector;
 
+    private final ClipBoard clipBoard;
+
     private int executionSize;
 
     private boolean isActive;
@@ -28,7 +33,8 @@ public class SessionImpl implements Session, Listener {
 
         Bukkit.getPluginManager().registerEvents(this, Main.getPlugin(Main.class));
 
-        this.regionSelector = RegionSelectorImpl.create(player.getWorld());
+        this.regionSelector = new RegionSelectorImpl(player.getWorld());
+        this.clipBoard = new ClipBoardImpl(Main.sessionManager.getIfPresent(player), this);
     }
 
     @Override
@@ -95,4 +101,18 @@ public class SessionImpl implements Session, Listener {
     public void setExecutionSize(int size) {
         this.executionSize = size;
     }
+
+    @Override
+    public void executeOperation(Operation operation) {
+        this.getClipBoard().copyBlocks();
+
+        operation.execute();
+        this.setExecutionSize(this.getExecutionSize() + 1);
+    }
+
+    @Override
+    public ClipBoard getClipBoard() {
+        return clipBoard;
+    }
+
 }
