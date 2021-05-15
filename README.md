@@ -13,3 +13,11 @@ If you want to Contribute to **Banko Edit**, fork the Project and modifie some f
 
 ## Developers
 The Plugin will have an API later one, but we don't plan do write any docs.
+
+## Building
+This project uses maven.
+To compile it yourself just execute this on the command line.
+```bash
+mvn package
+```
+
