@@ -1,7 +1,9 @@
 package de.luleu.bankoedit;
 
+import de.luleu.bankoedit.command.ReplaceCommand;
 import de.luleu.bankoedit.command.SessionCommand;
 import de.luleu.bankoedit.command.SetCommand;
+import de.luleu.bankoedit.command.UndoCommand;
 import de.luleu.bankoedit.sessions.SessionManager;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +15,9 @@ public class Main extends JavaPlugin implements CommandExecutor {
     @Override
     public void onEnable() {
         sessionManager = new SessionManager();
+
+        new ReplaceCommand();
+        new UndoCommand();
 
         this.getCommand("set").setExecutor(new SetCommand());
         this.getCommand("set").setTabCompleter(new SetCommand());

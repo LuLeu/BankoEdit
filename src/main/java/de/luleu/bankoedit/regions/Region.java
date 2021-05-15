@@ -2,7 +2,7 @@ package de.luleu.bankoedit.regions;
 
 import de.luleu.bankoedit.math.BlockVector;
 import org.bukkit.World;
-import org.jetbrains.annotations.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public interface Region extends Iterable<BlockVector>, Cloneable {
 
@@ -48,9 +48,9 @@ public interface Region extends Iterable<BlockVector>, Cloneable {
     /**
      * Sets the world that the selection is in.
      *
-     * @return the world, or null
+     * @return the world
      */
-    @Nullable World getWorld();
+    World getWorld();
 
     /**
      * Sets the world that the selection is in.
