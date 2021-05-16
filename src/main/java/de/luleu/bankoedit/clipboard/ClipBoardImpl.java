@@ -2,6 +2,8 @@ package de.luleu.bankoedit.clipboard;
 
 import de.luleu.bankoedit.sessions.Session;
 import de.luleu.bankoedit.sessions.SessionManager;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 
@@ -24,11 +26,11 @@ public class ClipBoardImpl implements ClipBoard {
     @Override
     public void copyBlocks() {
         if (!this.getSession().getRegionSelector().isDefined()) {
+            this.getSessionHolder().getPlayer().sendMessage(Component.text("§cSession is not defined"));
             return;
         }
 
         this.getBlocks().clear();
-
         World world = this.getSession().getRegionSelector().getRegion().getWorld();
 
         this.getSession().getRegionSelector().getRegion().forEach(blockVector -> {
