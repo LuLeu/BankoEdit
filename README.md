@@ -1,6 +1,6 @@
-# Banko Edit
+# TrashEdit
 
-**Banko Edit** is a Minecraft **[Paper]("https://papermc.io/")** based Plugin. It is inspired by **[World Edit]("https://github.com/EngineHub/WorldEdit")**.
+**TrashEdit** is a Minecraft **[Paper]("https://papermc.io/")** based Plugin. It is inspired by **[World Edit]("https://github.com/EngineHub/WorldEdit")**.
 
 ## Ingame usage
 - To create a session, use `/session create`.
